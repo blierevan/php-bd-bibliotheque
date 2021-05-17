@@ -1,21 +1,24 @@
-<form>
-Type : <input type='text' name='type'><br>
-<input type="submit">
-
-
 <?php
 
-$type = $_GET['type'];
+session_start();
 
-$bdd = mysqli_connect('mysql-hugo-jenouvrier.alwaysdata.net','230464_cdi','Bibliotheque50*','hugo-jenouvrier_bibliotheque');
+$type = strip_tags($_GET['type']);
 
-$resultat = mysqli_query( $bdd, 'INSERT INTO tbl_typeL (;');
+include_once('connect.php');
 
-echo 'Il y a '. mysqli_num_rows($resultat) . ' entrée(s) dans la base de donnés <br>';
+$sql = 'INSERT INTO tbl_typeL (libelle) VALUES (?);';
 
-while($donnees = mysqli_fetch_assoc($resultat)){
-    echo $donnees['Id'] . ' ' .$donnees['libelle'].'</br>';
-}
+$stmt = mysqli_prepare($bdd, $sql);
 
-echo "<a href='ajouter.php'>Ajouter</a>";
+mysqli_stmt_bind_param($stmt, 's', $type);
+
+mysqli_stmt_execute($stmt);
+
+mysqli_stmt_bind_result($stmt,$type);
+
+mysqli_stmt_fetch($stmt);
+
+include_once('close.php');
+
+header('Location: index.php');
 ?>
