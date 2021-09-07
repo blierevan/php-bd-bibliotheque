@@ -20,7 +20,7 @@ function  SupprimerBD ( $NomRecherche )
   
   
   // Delete FROM personne where nom='DUPONT' Limit 1;
-  $sql = "DELETE From Type_de_livre Where id_t='". $id ."' Limit 1;" ;
+  $sql = "DELETE From type Where id_t='". $id ."' Limit 1;" ;
   //--- Préparation de la requête
   $stmt = mysqli_prepare($db,$sql);
     

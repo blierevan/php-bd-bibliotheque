@@ -3,10 +3,10 @@
 session_start();
 
 //Esct ce que la variable global $_POST['label']n'est pas vide
-if ( (isset($_POST['libelle'])) && (!empty($_POST['libelle'])) ){
+if ( (isset($_POST['libelle_t'])) && (!empty($_POST['libelle_t'])) ){
     // 
     $id =strip_tags($_POST['id_t']);
-    $label =strip_tags($_POST['libelle']);
+    $label =strip_tags($_POST['libelle_t']);
 
 
    
@@ -16,7 +16,7 @@ if ( (isset($_POST['libelle'])) && (!empty($_POST['libelle'])) ){
     //On exécute la reque^te SQL et on stocke le résultat dans un tableau associatif 
 
     
-    $sql ='UPDATE Type_de_livre SET libelle = ? WHERE id_t = ?;';
+    $sql ='UPDATE type SET libelle_t = ? WHERE id_t = ?;';
 
     //on prepare la requete 
     $stmt = mysqli_prepare($db,$sql);
@@ -50,7 +50,7 @@ if ((isset($_GET['id_t'])) && !empty($_GET['id_t']))
     //On exécute la reque^te SQL et on stocke le résultat dans un tableau associatif 
 
     
-    $sql ='SELECT id_t, libelle FROM Type_de_livre WHERE id_t = ?;';
+    $sql ='SELECT id_t, libelle_t FROM type WHERE id_t = ?;';
 
     //on prepare la requete 
     $stmt = mysqli_prepare($db,$sql);
@@ -97,7 +97,7 @@ if ((isset($_GET['id_t'])) && !empty($_GET['id_t']))
                 
             <label for="label">Libéllé</label>
             <input type="hidden" id='id_t' name="id_t" value="<?php print($id) ;?>">
-            <input type="text" id="libelle" name="libelle" class="form-control" value="<?php print($label); ?>">
+            <input type="text" id="libelle_t" name="libelle_t" class="form-control" value="<?php print($label); ?>">
             </div>
             <p>
             

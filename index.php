@@ -8,7 +8,7 @@ session_start();
     //On exécute la reque^te SQL et on stocke le résultat dans un tableau associatif 
 
     
-    $sql ='SELECT id_t, libelle FROM Type_de_livre;';
+    $sql ='SELECT id_t, libelle_t FROM type;';
     $result = mysqli_query($db, $sql);
     //On ferme la connexion 
     include_once('close.php');
@@ -60,12 +60,13 @@ session_start();
     
     
     <?php
+
     foreach($result as $type){?>
         <tr>
         <td><?php print($type['id_t']);    ?></td>
-        <td><?php print($type['libelle']); ?></td>
+        <td><?php print($type['libelle_t']); ?></td>
         <td><a alt="Voir "class="btn btn-primary"   href="details.php?id_t= <?php print($type['id_t']);?>"> <i class="far fa-eye">      </i></a> 
-            <a alt="Voir "class="btn btn-info"      href="edit.php?id_t=    <?php print($type['id_t']);?>" ><i class="fas fa-edit">     </i></a>
+            <a alt="Voir "class="btn btn-info"      href="edit.php?id_t=    <?php print($type['id_t']);?>&libelle_t=<?php print($type['libelle_t']);?>" ><i class="fas fa-edit">     </i></a>
             <a alt="Voir "class="btn btn-danger"    href="delet.php?id_t=   <?php print($type['id_t']);?>" ><i class="fas fa-trash">    </i></a></td>
         </tr>
         <?php

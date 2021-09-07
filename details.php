@@ -14,7 +14,7 @@ if ((isset($_GET['id_t'])) && !empty($_GET['id_t']))
     //On exécute la reque^te SQL et on stocke le résultat dans un tableau associatif 
 
     
-    $sql ='SELECT id_t, libelle FROM Type_de_livre WHERE id_t = ?;';
+    $sql ='SELECT id_t, libelle_t FROM type WHERE id_t = ?;';
 
     //on prepare la requete 
     $stmt = mysqli_prepare($db,$sql);
@@ -26,13 +26,13 @@ if ((isset($_GET['id_t'])) && !empty($_GET['id_t']))
     mysqli_stmt_execute($stmt);
 
     //on definit les variable qui va recup le type de livre
-    mysqli_stmt_bind_result($stmt, $id, $libelle);
+    mysqli_stmt_bind_result($stmt, $id, $label);
 
     mysqli_stmt_fetch($stmt);
 
     //On ferme la connexion 
     include_once('close.php');
-    if (!$libelle) {
+    if (!$label) {
         $_SESSION['erreur'] ="Ce type de livre n'existe pas ";
 
         header ('Location : index.php');
@@ -59,9 +59,9 @@ if ((isset($_GET['id_t'])) && !empty($_GET['id_t']))
     <main class ="container">
         <div class="row">
             <section class="col-12">
-            <h1>Details du type de livre <?php print($libelle); ?></h1>
+            <h1>Details du type de livre <?php print($label); ?></h1>
             <p>ID : <?php print($id) ;?> </p>
-            <p>libelllé : <?php print($libelle); ?> </p>
+            <p>libelllé : <?php print($label); ?> </p>
             <p>
             <a class ="btn btn-info" href="index.php"> Retour à la liste </a>
             

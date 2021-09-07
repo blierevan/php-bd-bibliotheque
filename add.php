@@ -19,7 +19,7 @@ try {
  $label = strip_tags($_POST['label']);
 
  //On prepare la requete
-$sql ="INSERT INTO Type_de_livre (libelle) VALUES(?);";
+$sql ="INSERT INTO type (libelle_t) VALUES(?);";
 $stmt = mysqli_prepare($db,$sql);
 mysqli_stmt_bind_param($stmt,'s',$label);
 
@@ -32,7 +32,7 @@ mysqli_stmt_close($stmt);
 
  
  // On redige un message pour l'utilisateur
- $_SESSION['message'] ='Le type de livre "'.$label.'" a été enregistré';
+ $_SESSION['message'] ='Le type de livre "'.$label.'" a été enregistré'; 
 
  // On ferme la connexion
  include_once 'close.php';
@@ -68,7 +68,7 @@ mysqli_stmt_close($stmt);
                     if(!empty($_SESSION['message'])){
                             print('<div class="alert alert-danger" role="alert">'.$_SESSION['erreur'].'</div>');
                             
-                        $_SESSION['messgae'] = "";
+                        $_SESSION['message'] = "";
                         }
 
                 ?>

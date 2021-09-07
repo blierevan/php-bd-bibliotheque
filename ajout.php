@@ -17,13 +17,13 @@ par un Programme sur le Serveur </h2>
 
   
   //--- Connection au SGBDR 
-  $DataBase = mysqli_connect ( "mysql-seblah.alwaysdata.net" , "seblah_cdi" , "Bibliotheque50*" ) ;
+  $DataBase = mysqli_connect ( "mysql-blierevan.alwaysdata.net" , "blierevan" , "ficelle35" ) ;
 
   //--- Ouverture de la base de donn�es
-  mysqli_select_db ( $DataBase, "seblah_bibliotheque" ) ;
+  mysqli_select_db ( $DataBase, "blierevan_cdi" ) ;
 
   //--- Pr�paration de la requ�te
-  $Requete = "INSERT INTO Type_de_livre ( id_t ,libelle )
+  $Requete = "INSERT INTO type ( id_t ,libelle_t )
                   VALUES ('','$love');";
     
   //--- Ex�cution de la requ�te (fin du script possible sur erreur ...)
