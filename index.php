@@ -1,20 +1,21 @@
-<?php
-//on démarre la session
+<?php 
+//On demarre une sesssion
 session_start();
+   
 
-//on se co a la BDD
-include('connect.php');
+    // On se connecte à la base de données
+    include_once('connect.php');
+    //On exécute la reque^te SQL et on stocke le résultat dans un tableau associatif 
 
-// On exec la requete SQL et on stocke le résultat dans un tableau associatif
-$sql = 'SELECT id, libelle FROM tbl_typeL;';
-$resultat = mysqli_query( $bdd, $sql);
+    
+    $sql ='SELECT id_t, libelle FROM Type_de_livre;';
+    $result = mysqli_query($db, $sql);
+    //On ferme la connexion 
+    include_once('close.php');
+    
 
-//on ferme la connexion
-include_once('close.php');
-
-?>
-
-
+    
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,58 +23,60 @@ include_once('close.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <title>Liste des types de livres</title>
+    <script src="https://kit.fontawesome.com/2696450378.js" crossorigin="anonymous"></script>
+    <title>Liste des Types des Livres</title>
 </head>
 <body>
-<div class="container">
+<main class="container">
     <div class="row">
-
-<section class="col-12">
-<?php
-if (!empty($_SESSION['error'])) {
-?>
-    <div class="alert alert-danger" role="alert">
-        <?php print($_SESSION['error']); 
-        $_SESSION['error'] = "";?>
-    </div>
-<?php } ?>
-
-
-
-<?php
-if (!empty($_SESSION['Message'])) {
-?>
-    <div class="alert alert-success" role="alert">
-        <?php print($_SESSION['Message']); 
-        $_SESSION['Message'] = "";?>
-    </div>
-<?php } ?>
-
-
-    <h1>Liste des types de livres</h1>
-    <table class="table">
-<thead>
-    <th>ID</th>
-    <th>Libellé</th>
-    <th>Actions</th>
-</thead>
-    <?php  
-    foreach ($resultat as $type) {
-    ?>  
-        <tr>
-        <td><?php print($type['id']); ?></td>
-        <td><?php print($type['libelle']); ?></td>
-        <td><a href="details.php?id=<?php print($type['id']); ?>">Voir</a> Modifier Supprimer</td>
-        </tr>
     <?php
-       }
+    if (!empty($_SESSION['error'])){
+
+    
     ?>
+        <div class="alert alert-success" role="alert">
+            <?php print ($_SESSION['error']);
+            $_SESSION['error']="";?>
+        </div> 
+        <?php } ?>
+    <?php
+    if (!empty($_SESSION['message'])){
+
+    
+    ?>
+        <div class="alert alert-success" role="alert">
+            <?php print ($_SESSION['message']);
+            $_SESSION['message']="";?>
+        </div> 
+        <?php } ?>
+                <h1>Liste de types de Livres</h1>
+                    <table class="table">
+                    <thead>
+                        <th>ID</th>
+                        <th>libellé</th>
+                        <th></th>
+                        <th></th>
+                    </thead>
+    
+    
+    <?php
+    foreach($result as $type){?>
+        <tr>
+        <td><?php print($type['id_t']);    ?></td>
+        <td><?php print($type['libelle']); ?></td>
+        <td><a alt="Voir "class="btn btn-primary"   href="details.php?id_t= <?php print($type['id_t']);?>"> <i class="far fa-eye">      </i></a> 
+            <a alt="Voir "class="btn btn-info"      href="edit.php?id_t=    <?php print($type['id_t']);?>" ><i class="fas fa-edit">     </i></a>
+            <a alt="Voir "class="btn btn-danger"    href="delet.php?id_t=   <?php print($type['id_t']);?>" ><i class="fas fa-trash">    </i></a></td>
+        </tr>
+        <?php
+        }
+        ?>
+
     </table>
-
-       <a href="add.php" class="btn btn-primary">Ajouter un type</a>
-        </section>
+    <a class="btn btn-primary" href="add.php"> Ajouter un type </a>
     </div>
-</div>
-
+</main>
+    
+    
 </body>
 </html>

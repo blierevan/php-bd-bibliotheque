@@ -1,4 +1,3 @@
 <?php
-mysqli_close($bdd);
-
+mysqli_close($db)
 ?>
